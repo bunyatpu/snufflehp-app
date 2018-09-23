@@ -1,0 +1,49 @@
+version: '2'
+ 
+services:
+  snufflehp_frontend:
+    image: bunyut/yaoi:1.0.0
+    container_name: snufflehp_frontend
+    command: npm run dev
+    ports:
+      - 3004:3000
+    volumes:
+      - ./snufflehp-app-front:/app
+    environment:
+      - url_api=http://snuffle_api:3005
+      - API_HOST_URL=http://localhost:3005
+
+  snufflehp_api:
+    image: bunyut/yaoi:1.0.0
+    container_name: snuffle_api
+    command: npm run dev
+    ports:
+      - 3005:3005
+    volumes:
+      - ./snufflehp-app-api:/app
+    links:
+      - mysql_snufflehp:db
+    environment:
+      - db=mysql_snufflehp
+
+  #--
+  mysql_snufflehp:
+    image: mysql:5.6
+    container_name: mysql_snufflehp
+    volumes:
+      - /Users/bunyut/site/share_any:/drive_a
+      - ./sufflehp-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+
+  pma_snufflehp:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma_snufflehp
+    links:
+      -  mysql_snufflehp:db
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - 6001:80

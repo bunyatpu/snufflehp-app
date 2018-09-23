@@ -1,0 +1,13 @@
+version: '2'
+ 
+services:
+  yaoi_frontend:
+    image: bunyut/yaoi:1.0.0
+    container_name: snuffle_frontend
+    command: npm run dev
+    ports:
+      - 3002:3000
+    volumes:
+      - .:/app
+    environment:
+      - url_api=http://localhost:4001

@@ -1,0 +1,5 @@
+node_modules
+snufflehp-app-front/.next
+snufflehp-app-front/node_modules
+snufflehp-app-api/node_modules
+snufflehp-db
