@@ -12,6 +12,7 @@ services:
     environment:
       - url_api=http://ec2-54-255-245-192.ap-southeast-1.compute.amazonaws.com:3003
       - API_HOST_URL=http://ec2-54-255-245-192.ap-southeast-1.compute.amazonaws.com:3003
+      - NODE_ENV=production
 
   snufflehp_api:
     image: bunyut/yaoi:1.0.0
