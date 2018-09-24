@@ -24,5 +24,5 @@ services:
     environment:
       - db=snuffle-db.cdxjjnzzkref.ap-southeast-1.rds.amazonaws.com
       - DB_HOST=snuffle-db.cdxjjnzzkref.ap-southeast-1.rds.amazonaws.com
-      - DB_USER=root
-      - DB_PASS=123456
+      - DB_USER=snufflehp
+      - DB_PASS=jjtomson
