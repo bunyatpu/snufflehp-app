@@ -4,7 +4,7 @@ services:
   snufflehp_frontend:
     image: bunyut/yaoi:1.0.0
     container_name: snufflehp_frontend
-    command: npm run dev
+    command: sh -c "npm i && npm build && npm run start"
     ports:
       - 80:3000
     volumes:
@@ -16,7 +16,7 @@ services:
   snufflehp_api:
     image: bunyut/yaoi:1.0.0
     container_name: snuffle_api
-    command: npm run dev
+    command: sh -c "npm i && npm run prod"
     ports:
       - 3003:3005
     volumes:
