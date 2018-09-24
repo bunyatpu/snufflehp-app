@@ -74,6 +74,10 @@ const loadProductDetail = (req,res) => {
   }).then((model)=>{
 
     //console.log('models=>',models)
+    // setTimeout(()=>{
+    //   res.json({status:true,product:model})
+    // },4000)
+
     res.json({status:true,product:model})
   })
   .catch((err)=>{

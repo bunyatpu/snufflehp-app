@@ -10,7 +10,8 @@ import {
 import Router from "next/router";
 import { connect } from 'react-redux'
 import getConfig from 'next/config'
-
+import ContentLoader,{ List } from 'react-content-loader'
+import { loadProductDetail } from "../../redux/actions/productsAction";
 
 
 //import CardProduct from "../commons/CardProduct";
@@ -22,8 +23,29 @@ class ProductDetail extends Component {
   constructor(){
     super()
     this.state = {
-      amt:1
+      amt:1,
+      loading:true
     }
+  }
+
+  componentDidMount(props){
+    //console.log('props',props,this.props)
+
+    const { id } = this.props
+    
+    this.onLoadProductDetail(id)
+
+   
+  }
+
+  onLoadProductDetail = async (id) =>{
+
+    const { loadProductDetail } = this.props
+
+    //this.setState({loading:true})
+    await loadProductDetail(id)
+    this.setState({loading:false})
+
   }
 
 
@@ -33,7 +55,6 @@ class ProductDetail extends Component {
 
   handleInput = (e) =>{
 
- 
     if( e.target.value.match(/[1-9]/g) ){
       this.setState({amt:e.target.value})
     }
@@ -58,14 +79,16 @@ class ProductDetail extends Component {
   render(){
 
     const { detail } = this.props;
-    const { amt } = this.state
+    const { amt,loading } = this.state
     const { publicRuntimeConfig:{API_URL_HOST} } = getConfig()
 
-    const prodDetail = (detail.product !== null) ? detail.product:{}
+    //console.log('detail',detail)
 
-    console.log('detail',detail)
+    const prodDetail = (detail.product !== null && detail.product !== undefined) ? detail.product:{}
 
-    const coverPath = (prodDetail.cover_path !== '') 
+    //console.log('detail',detail)
+
+    const coverPath = (prodDetail.cover_path !== undefined) 
           ? `${API_URL_HOST}/images/covers/${prodDetail.cover_path}`
           :''
 
@@ -109,11 +132,22 @@ class ProductDetail extends Component {
               <Card >
                 <CardBody >
 
-                  <img 
-                    style={{height:'300px'}}
-                    src={coverPath} 
-                    alt="" 
-                  />
+                  { loading &&
+                    <ContentLoader 
+                      uniquekey="1"
+                      height={350} 
+                    />
+                  }
+                  { !loading &&
+
+                    <img 
+                      style={{height:'300px'}}
+                      src={coverPath} 
+                      alt="" 
+                    />
+
+                  }
+                  
                  
                   
                 </CardBody>
@@ -124,69 +158,79 @@ class ProductDetail extends Component {
               <Card  >
                 <CardBody >
 
-                  <Row>
-                    <Col>
-                      <h2>{prodDetail.name}</h2>
-                    </Col>
-                  </Row>
+                  { loading &&
+                    <List uniquekey="2"  />
+                  }
+                  { !loading &&
+                    <div>
 
-                  <Row>
-                    <Col>
-                      <p>{prodDetail.description}</p>
-                      <hr/>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col>
-                      <span>ราคา</span>
-                        <span 
-                           className="mr-3 ml-4"
-                           style={{
-                            fontWeight:'bold',
-                            color:'#ef810a',
-                            fontSize:'30px'
-                           }}
-                          >
-                          {prodDetail.price}
-                        </span>
-                      <span>บาท</span>
-                      <hr />
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col >
-                      <div className="d-flex align-items-center">
-                        <div className="mr-3">จำนวน</div>
-                        <InputGroup size="sm" style={{width:'180px'}}>
-                          <InputGroupAddon addonType="prepend">
-                            <Button outline onClick={this.onDownQty} style={{width:'50px'}}>-</Button>
-                          </InputGroupAddon>
-                          <Input 
-                            onChange={(e)=>this.handleInput(e)}
-                            className="text-center" 
-                            value={amt} 
-                            
-                          />
-                          <InputGroupAddon addonType="append">
-                            <Button outline onClick={this.onUpQty}  style={{width:'50px'}}>+</Button>
-                          </InputGroupAddon>
-                        </InputGroup>
-
-                      </div>
-                     
-                      <hr/>
                     
-                    </Col>
-                  </Row>
-                 
-                  <Row>
-                    <Col>
-                      <Button style={{width:'150px',padding:'8px'}} className="mr-3" color="info">เพิ่มลงรถเข็น</Button>    
-                      <Button style={{width:'150px',padding:'8px'}}  color="warning">สั่งซื้อ</Button>
-                    </Col>
-                  </Row>
+                      <Row>
+                        <Col>
+                          <h2>{prodDetail.name}</h2>
+                        </Col>
+                      </Row>
+
+                      <Row>
+                        <Col>
+                          <p>{prodDetail.description}</p>
+                          <hr/>
+                        </Col>
+                      </Row>
+
+                      <Row>
+                        <Col>
+                          <span>ราคา</span>
+                            <span 
+                              className="mr-3 ml-4"
+                              style={{
+                                fontWeight:'bold',
+                                color:'#ef810a',
+                                fontSize:'30px'
+                              }}
+                              >
+                              {prodDetail.price}
+                            </span>
+                          <span>บาท</span>
+                          <hr />
+                        </Col>
+                      </Row>
+
+                      <Row>
+                        <Col >
+                          <div className="d-flex align-items-center">
+                            <div className="mr-3">จำนวน</div>
+                            <InputGroup size="sm" style={{width:'180px'}}>
+                              <InputGroupAddon addonType="prepend">
+                                <Button outline onClick={this.onDownQty} style={{width:'50px'}}>-</Button>
+                              </InputGroupAddon>
+                              <Input 
+                                onChange={(e)=>this.handleInput(e)}
+                                className="text-center" 
+                                value={amt} 
+                                
+                              />
+                              <InputGroupAddon addonType="append">
+                                <Button outline onClick={this.onUpQty}  style={{width:'50px'}}>+</Button>
+                              </InputGroupAddon>
+                            </InputGroup>
+
+                          </div>
+                        
+                          <hr/>
+                        
+                        </Col>
+                      </Row>
+                    
+                      <Row>
+                        <Col>
+                          <Button style={{width:'150px',padding:'8px'}} className="mr-3" color="info">เพิ่มลงรถเข็น</Button>    
+                          <Button style={{width:'150px',padding:'8px'}}  color="warning">สั่งซื้อ</Button>
+                        </Col>
+                      </Row>
+
+                    </div>
+                  }
                   
                 </CardBody>
               </Card>
@@ -207,7 +251,8 @@ class ProductDetail extends Component {
                   </Row>
                   <Row>
                     <Col>
-                      <p>{ detail.detail }</p>
+                      { (loading) ? <List uniquekey="3"  />: <p>{ detail.detail }</p> }
+                     
                     </Col>
                   </Row>
                   
@@ -228,4 +273,4 @@ const mapStateToProps = (state) =>{
   }
 }
 
-export default connect(mapStateToProps)(ProductDetail)
+export default connect(mapStateToProps,{ loadProductDetail })(ProductDetail)

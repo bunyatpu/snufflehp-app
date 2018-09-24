@@ -21,7 +21,9 @@ services:
       - 3003:3005
     volumes:
       - ./snufflehp-app-api:/app
-    links:
-      - mysql_snufflehp:db
     environment:
       - db=snuffle-db.cdxjjnzzkref.ap-southeast-1.rds.amazonaws.com
+      - db=mysql_snufflehp
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASS=123456

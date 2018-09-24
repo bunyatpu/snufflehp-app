@@ -25,25 +25,30 @@ services:
       - mysql_snufflehp:db
     environment:
       - db=mysql_snufflehp
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASS=123456
 
   #--
   mysql_snufflehp:
     image: mysql:5.6
     container_name: mysql_snufflehp
+    ports:
+      - 3305:3306
     volumes:
       - /Users/bunyut/site/share_any:/drive_a
       - ./sufflehp-db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=123456
 
-  pma_snufflehp:
-    image: phpmyadmin/phpmyadmin
-    container_name: pma_snufflehp
-    links:
-      -  mysql_snufflehp:db
-    environment:
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=123456
-      - MYSQL_ROOT_PASSWORD=123456
-    ports:
-      - 6001:80
+  # pma_snufflehp:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: pma_snufflehp
+  #   links:
+  #     -  mysql_snufflehp:db
+  #   environment:
+  #     - MYSQL_USER=root
+  #     - MYSQL_PASSWORD=123456
+  #     - MYSQL_ROOT_PASSWORD=123456
+  #   ports:
+  #     - 6001:80

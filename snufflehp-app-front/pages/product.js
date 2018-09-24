@@ -3,7 +3,7 @@ import cookies from 'next-cookies'
 import { withRouter } from 'next/router'
 import MainLayout from "../components/commons/Layouts";
 import { loadUserInfo } from "../redux/actions/userAction";
-import { loadProductDetail } from "../redux/actions/productsAction";
+//import { loadProductDetail } from "../redux/actions/productsAction";
 import ProductDetail from "../components/ProductDetail";
 
 
@@ -22,7 +22,7 @@ class ProductPage extends Component {
     }
 
     //load product detail
-    await loadProductDetail(query.id)(ctx.store.dispatch)
+    //await loadProductDetail(query.id)(ctx.store.dispatch)
 
 
     return {}
@@ -31,7 +31,7 @@ class ProductPage extends Component {
   render(){
 
     const { router:{query} } = this.props 
-    console.log('product id',query)
+    //console.log('product id',query)
 
     return (
       <MainLayout>

@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
 import Slider from "react-slick";
+//import ContentLoader from 'react-content-loader'
+import { SyncLoader } from 'react-spinners';
+import { 
 
+  Col, Row 
+
+} from 'reactstrap';
 
 class SlidePreview extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      items:[]
+      items:[],
+      loading:true
     }
   }
 
   componentDidMount(){
-    setTimeout(() => {
-      this.setState({items:[2,3,4,5,2,3,4]})
-    }, 0);
+    //console.log('componentDidMount')
+
+    this.setState({items:[2,3,4,5,2]})
+  }
+
+  onImageLoaded = () =>{
+    //console.log('onImageLoaded2')
+    this.setState({loading:false})
   }
 
   render() {
 
-    const { items } = this.state
+    const { items,loading } = this.state
+
+    //console.log('render')
 
     const lists = items.map((i,k)=>{
       return (
@@ -30,18 +44,27 @@ class SlidePreview extends Component {
     })
 
 
+    // const settings = {
+     
+    //   dots: true,
+    //   lazyLoad: true,
+    //   infinite: true,
+    //   speed: 500,
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1,
+    //   initialSlide: 2
+    // };
+
     const settings = {
+      
       dots: true,
       infinite: true,
-      lazyLoad: true,
-      //speed: 500,
-      slidesToShow: 3,
+      lazyLoad: 'ondemand',
+      slidesToShow: 4,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 5000,
+      speed: 3000,
       autoplaySpeed: 5000,
-      //cssEase: "linear",
-      //lazyLoad: true,
       variableWidth: true,
       adaptiveHeight: true,
       appendDots: dots => (
@@ -53,16 +76,42 @@ class SlidePreview extends Component {
           <ul> {dots} </ul>
         </div>
       ),
+      onInit: ()=>{
+         // console.log('onInit')
+        this.onImageLoaded()
+      },
+      onLazyLoad: () =>{
+        //console.log('onLazyLoad')
+      }
     };
 
 
     return (
       <div style={{height:'300px'}}>
-         
-        <Slider {...settings} >
-          { lists } 
-        </Slider>
 
+        { loading && 
+          <Row className="d-flex align-items-center" style={{background:'#fff',height:'100%',width:'100%',margin:'0px'}}>
+            <Col className="text-center">
+              <SyncLoader
+                sizeUnit={"px"}
+                size={25}
+                color={'#00d5b2'}
+                loading={loading}
+              />
+              <div style={{color:'#b9b5b5',fontSize:'40px',fontWeight:'bold'}}>Loading...</div>
+            </Col>
+            
+          </Row>
+          
+        }
+       
+        <div style={{display:(!loading)?'block':'none'}}>
+          <Slider {...settings} >
+            { lists } 
+          </Slider>
+        </div>
+       
+     
          
       </div>
       
