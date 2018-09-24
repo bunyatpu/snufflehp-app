@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "prod": "node server.js"
+    "prod": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "asset-require-hook": "^1.2.0",
