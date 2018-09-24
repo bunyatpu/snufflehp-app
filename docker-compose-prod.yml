@@ -10,8 +10,8 @@ services:
     volumes:
       - ./snufflehp-app-front:/app
     environment:
-      - url_api=http://ec2-54-255-245-192.ap-southeast-1.compute.amazonaws.com:3003
-      - API_HOST_URL=http://ec2-54-255-245-192.ap-southeast-1.compute.amazonaws.com:3003
+      - url_api=http://52.77.239.106:3003
+      - API_HOST_URL=http://52.77.239.106:3003
       - NODE_ENV=production
 
   snufflehp_api:
