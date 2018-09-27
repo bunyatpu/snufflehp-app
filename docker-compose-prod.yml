@@ -28,13 +28,13 @@ services:
       - DB_USER=root
       - DB_PASS=123456
     
-    mysql_snufflehp:
-      image: mysql:5.6
-      container_name: mysql_snufflehp
-      ports:
-        - 3305:3306
-      volumes:
-        - .:/drive_a
-        - ./sufflehp-db:/var/lib/mysql
-      environment:
-        - MYSQL_ROOT_PASSWORD=123456
+  mysql_snufflehp:
+    image: mysql:5.6
+    container_name: mysql_snufflehp
+    ports:
+      - 3305:3306
+    volumes:
+      - .:/drive_a
+      - ./sufflehp-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
