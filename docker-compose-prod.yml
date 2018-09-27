@@ -27,3 +27,14 @@ services:
       - DB_HOST=snuffle-db.cdxjjnzzkref.ap-southeast-1.rds.amazonaws.com
       - DB_USER=snuffle
       - DB_PASS=jjtomson
+    
+    mysql_snufflehp:
+      image: mysql:5.6
+      container_name: mysql_snufflehp
+      ports:
+        - 3305:3306
+      volumes:
+        - .:/drive_a
+        - ./sufflehp-db:/var/lib/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=123456
