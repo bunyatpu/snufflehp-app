@@ -23,10 +23,10 @@ services:
     volumes:
       - ./snufflehp-app-api:/app
     environment:
-      - db=snuffle-db.cdxjjnzzkref.ap-southeast-1.rds.amazonaws.com
-      - DB_HOST=snuffle-db.cdxjjnzzkref.ap-southeast-1.rds.amazonaws.com
-      - DB_USER=snuffle
-      - DB_PASS=jjtomson
+      - db=mysql_snufflehp
+      - DB_HOST=mysql_snufflehp
+      - DB_USER=root
+      - DB_PASS=123456
     
     mysql_snufflehp:
       image: mysql:5.6
