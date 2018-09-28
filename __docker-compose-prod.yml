@@ -10,13 +10,13 @@ services:
     volumes:
       - ./snufflehp-app-front:/app
     environment:
-      - url_api=http://13.250.34.73:3003
-      - API_HOST_URL=http://snufflehp_api
+      - url_api=http://52.77.239.106:3003
+      - API_HOST_URL=http://52.77.239.106:3003
       - NODE_ENV=production
 
   snufflehp_api:
     image: bunyut/yaoi:1.0.0
-    container_name: snufflehp_api
+    container_name: snuffle_api
     command: sh -c "npm i && npm run prod"
     ports:
       - 3003:3005
@@ -27,14 +27,3 @@ services:
       - DB_HOST=snuffle-db.cdxjjnzzkref.ap-southeast-1.rds.amazonaws.com
       - DB_USER=snuffle
       - DB_PASS=jjtomson
-    
-  # mysql_snufflehp:
-  #   image: mysql:5.6
-  #   container_name: mysql_snufflehp
-  #   ports:
-  #     - 3305:3306
-  #   volumes:
-  #     - .:/drive_a
-  #     - ./sufflehp-db:/var/lib/mysql
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=123456
