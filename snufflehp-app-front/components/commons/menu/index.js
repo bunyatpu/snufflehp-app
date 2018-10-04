@@ -20,7 +20,8 @@ class MenuHeader extends Component {
       "items":[
         {name:"หน้าหลัก",link:"/"},
         {name:"สินค้าทั้งหมด",link:"/all_products"},
-        {name:"เปิดจอง แด่..รัก",link:"/product/แด่...รัก by Snufflehp"},
+        {name:"เปิดจอง แด่..รัก",link:"/product/1"},
+        {name:"ชำระเงิน",link:"/order_lists"},
         {name:"แจ้งโอนเงิน",link:"/tran_status"},
         //{name:"ชำระเงิน",link:"/payment"},
 

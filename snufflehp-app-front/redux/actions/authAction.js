@@ -50,7 +50,7 @@ const signinAction = (datas) =>{
 
       const { API_URL } = getApi();
 
-      console.log('API_URL',API_URL)
+      //console.log('API_URL',API_URL)
       const raw = await fetch(`${API_URL}/auth/signin`, {
         method: 'POST',
         headers: { 

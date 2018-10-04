@@ -181,14 +181,14 @@ class Account extends Component {
           </div>
          }
 
-         <Modal isOpen={modalLogout} toggle={this.toggleDialogLogOut} >
-          <ModalBody>
-            <h3>ต้องการออกจากระบบหรือไม่ ?</h3>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.isLogout} >Logout</Button>
-            <Button olor="inherit" onClick={this.toggleDialogLogOut} >Cancel</Button>
-          </ModalFooter>
+        <Modal isOpen={modalLogout} toggle={this.toggleDialogLogOut} >
+            <ModalBody>
+              <h3>ต้องการออกจากระบบหรือไม่ ?</h3>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={this.isLogout} >Logout</Button>
+              <Button olor="inherit" onClick={this.toggleDialogLogOut} >Cancel</Button>
+            </ModalFooter>
         </Modal>
       </div>
       

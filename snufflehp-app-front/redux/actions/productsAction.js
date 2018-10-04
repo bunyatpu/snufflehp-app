@@ -1,6 +1,7 @@
 import 'isomorphic-unfetch'
 //import { getApi } from "../../config";
 import { getApi } from "../../components/commons/utility/getApi";
+import { getCookie } from "../../components/commons/utility/cookie";
 // import { setCookie,removeCookie } from '../../components/commons/utility/cookie'
 import actionType from '../constants'
 
@@ -177,10 +178,168 @@ const loadProductDetail = (id) => {
   }
 }
 
+const loadCarts = () => {
+
+  return async (dispatch) => {
+
+    let res = {status:true}
+
+    //--
+    try {
+
+      //console.log('API_URL', API_URL)
+      const { API_URL } = getApi();
+      const token = getCookie('token');
+      //console.log('token',token)
+
+
+      const raw = await fetch(`${API_URL}/products/load_carts`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type':'application/x-www-form-urlencoded',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+  
+      res = await raw.json()
+
+      //console.log('res',res)
+      if(res.status){
+        dispatch({
+          type:actionType.CART_LOAD,
+          payload:res.carts
+        })
+      }else{
+        console.log('error',res.message)
+      }
+     
+    } catch (error) {
+
+      console.log('error',error.message)
+     
+    }
+
+    return res;
+
+  }
+}
+
+const updateCart = ({ product_id,amount,status }) => {
+
+
+  return async (dispatch) => {
+
+    let res = {status:true}
+
+    //--
+    try {
+
+      //console.log('API_URL', API_URL)
+      const { API_URL } = getApi();
+      const token = getCookie('token');
+      //console.log('token',token)
+
+      const model = {
+
+        product_id,
+        amount,
+        status:(status === undefined)?1:status
+
+      }
+
+
+      const raw = await fetch(`${API_URL}/products/update_cart`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type':'application/x-www-form-urlencoded',
+          'Authorization': `Bearer ${token}`
+        },
+        body:`params=${JSON.stringify(model)}`
+      })
+  
+      res = await raw.json()
+
+      //console.log('res',res)
+      if(res.status){
+        dispatch({
+          type:actionType.CART_UPDATE,
+          payload:res.model
+        })
+      }else{
+        //console.log('error',res.message)
+      }
+     
+    } catch (error) {
+
+      console.log('error',error.message)
+     
+    }
+
+    return res;
+
+  }
+
+}
+
+const deleteOrderItem = (item) => {
+
+  return async (dispatch)=>{
+
+
+    let res = {status:true}
+
+    //--
+    try {
+
+      //console.log('API_URL', API_URL)
+      const { API_URL } = getApi();
+      const token = getCookie('token');
+      //console.log('token',token)
+
+
+      const raw = await fetch(`${API_URL}/products/delete_cart`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type':'application/x-www-form-urlencoded',
+          'Authorization': `Bearer ${token}`
+        },
+        body:`params=${JSON.stringify(item)}`
+      })
+  
+      res = await raw.json()
+
+      //console.log('res',res)
+      if(res.status){
+        dispatch({
+          type:actionType.DELETE_ORDER_PRODUCT,
+          payload:item
+        })
+      }else{
+        //console.log('error',res.message)
+      }
+     
+    } catch (error) {
+
+      console.log('error',error.message)
+     
+    }
+
+    return res;
+
+
+
+   
+
+  }
+}
+
 
 export {
   loadAllProducts,
   loadNewProducts,
   loadNewOther,
-  loadProductDetail
+  loadProductDetail,
+  loadCarts,
+  updateCart,
+  deleteOrderItem
 }

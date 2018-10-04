@@ -11,11 +11,10 @@ import Router from "next/router";
 import { connect } from 'react-redux'
 import getConfig from 'next/config'
 import ContentLoader,{ List } from 'react-content-loader'
-import { loadProductDetail } from "../../redux/actions/productsAction";
-
-
+import { loadProductDetail, updateCart } from "../../redux/actions/productsAction";
+import { toggleStatus } from "../../redux/actions/statusTagActon";
+import { showDialogGotoSignin } from "../../redux/actions/UtilityAction";
 //import CardProduct from "../commons/CardProduct";
-
 
 
 class ProductDetail extends Component {
@@ -24,7 +23,8 @@ class ProductDetail extends Component {
     super()
     this.state = {
       amt:1,
-      loading:true
+      loading:true,
+      statusShow:false
     }
   }
 
@@ -44,10 +44,10 @@ class ProductDetail extends Component {
 
     //this.setState({loading:true})
     await loadProductDetail(id)
+   
     this.setState({loading:false})
 
   }
-
 
   goto = (path) =>{
     Router.push(path)
@@ -73,16 +73,53 @@ class ProductDetail extends Component {
     })
   }
 
+  onAddToCart = async () => {
 
+    //console.log('onAddToCart')
+
+    const { updateCart,id,cart:{list},toggleStatus,showDialogGotoSignin } = this.props
+
+    //filter
+    const currProd = list.filter((i)=>{
+      return (i.product_id == id)
+    })
+
+  
+    const modelNow = (currProd.length <= 0) ? {amount:0}:currProd[0]
+
+    const res = await updateCart({
+      product_id:id,
+      amount:( parseInt(this.state.amt,10) + parseInt(modelNow.amount,10) )
+    })
+
+    //console.log('res->',res)
+
+    if(!res.status){
+      console.log('showDialogGotoSignin()')
+      showDialogGotoSignin()
+    }else{
+      toggleStatus()
+    }
+
+   
+
+  }
+
+  showStatusTag = () => {
+
+    //this.setState({statusShow:true})
+    //setTimeout(()=>this.setState({statusShow:false}) ,1500)
+
+  }
 
 
   render(){
 
     const { detail } = this.props;
-    const { amt,loading } = this.state
+    const { amt,loading ,statusShow } = this.state
     const { publicRuntimeConfig:{API_URL_HOST} } = getConfig()
 
-    //console.log('detail',detail)
+    //console.log('cart',cart)
 
     const prodDetail = (detail.product !== null && detail.product !== undefined) ? detail.product:{}
 
@@ -94,7 +131,7 @@ class ProductDetail extends Component {
 
 
     return (
-      <div>
+      <div >
         <style jsx global>{`
           .product_detail .btn-outline-secondary{
             border-color: #c9cacc;
@@ -224,7 +261,7 @@ class ProductDetail extends Component {
                     
                       <Row>
                         <Col>
-                          <Button style={{width:'150px',padding:'8px'}} className="mr-3" color="info">เพิ่มลงรถเข็น</Button>    
+                          <Button onClick={()=>this.onAddToCart()} style={{width:'150px',padding:'8px'}} className="mr-3" color="info">เพิ่มลงรถเข็น</Button>    
                           <Button style={{width:'150px',padding:'8px'}}  color="warning">สั่งซื้อ</Button>
                         </Col>
                       </Row>
@@ -261,7 +298,8 @@ class ProductDetail extends Component {
             </Col>
           </Row>
         </Container>
-
+        
+      
       </div>
     )
   }
@@ -269,8 +307,14 @@ class ProductDetail extends Component {
 
 const mapStateToProps = (state) =>{
   return {
-    detail:state.products.detail
+    detail:state.products.detail,
+    cart:state.products.cartOrders
   }
 }
 
-export default connect(mapStateToProps,{ loadProductDetail })(ProductDetail)
+export default connect(mapStateToProps,{ 
+  loadProductDetail,
+  updateCart, 
+  toggleStatus ,
+  showDialogGotoSignin
+})(ProductDetail)

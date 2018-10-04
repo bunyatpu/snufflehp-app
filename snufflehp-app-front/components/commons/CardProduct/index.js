@@ -12,6 +12,9 @@ import {
 import Router from 'next/router'
 import { connect } from 'react-redux'
 import getConfig from 'next/config'
+import { updateCart } from "../../../redux/actions/productsAction";
+import { toggleStatus } from "../../../redux/actions/statusTagActon";
+import { showDialogGotoSignin } from "../../../redux/actions/UtilityAction";
 
 
 
@@ -35,9 +38,42 @@ class CardProduct extends Component {
   }
 
   handleOver = (e,dir) =>{
-    //e.preventDefault();
-    //console.log('handleOver dir',dir)
+
     this.setState({hover:dir})
+  }
+
+  handleAddCart = async (e) => {
+
+    e.preventDefault();
+    e.stopPropagation();//ป้องกัน click parent
+
+    //console.log('handleAddCart')
+    const { updateCart,model:{id},cart:{list},toggleStatus,showDialogGotoSignin } = this.props
+
+    //filter
+    const currProd = list.filter((i)=>{
+      return (i.product_id == id)
+    })
+
+    //console.log('currProd',currProd)
+
+  
+    const modelNow = (currProd.length <= 0) ? {amount:0}:currProd[0]
+
+    const res = await updateCart({
+      product_id:id,
+      amount:( 1 + parseInt(modelNow.amount,10) )
+    })
+
+    if(!res.status){
+      showDialogGotoSignin()
+    }else{
+      toggleStatus()
+    }
+
+    //this.showStatusTag()
+    
+
   }
 
 
@@ -86,6 +122,8 @@ class CardProduct extends Component {
               {
                 hover && (
                   <div 
+
+                    onClick={(e)=>this.handleAddCart(e)}
                     className="text-center"
                     style={{
                       background: 'rgb(7, 175, 147)',
@@ -111,8 +149,8 @@ class CardProduct extends Component {
 
 const mapStateToProps = (state) =>{
   return {
-   
+    cart:state.products.cartOrders
   }
 }
 
-export default connect(mapStateToProps,{})(CardProduct)
+export default connect(mapStateToProps,{ updateCart,toggleStatus, showDialogGotoSignin })(CardProduct)

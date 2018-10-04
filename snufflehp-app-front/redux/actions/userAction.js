@@ -1,6 +1,6 @@
 import 'isomorphic-unfetch'
 import actType from "../constants";
-import cookies from 'next-cookies'
+//import cookies from 'next-cookies'
 //import { API_URL } from "../../config";
 // import getConfig from 'next/config'
 // const { publicRuntimeConfig } = getConfig()
@@ -20,6 +20,7 @@ const loadUserInfo = (token) =>{
     try {
 
       //console.log('API_URL', API_URL)
+      
       const { API_URL } = getApi();
 
       const raw = await fetch(`${API_URL}/user/load_user`, {

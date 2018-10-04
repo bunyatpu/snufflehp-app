@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
-//import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { FaShoppingCart } from 'react-icons/fa';
+import Router from "next/router";
+//import { loadCarts } from "../../../redux/actions/productsAction";
 
 class Cart extends Component {
+
+  goto = (url) =>{
+    Router.push(url)
+  }
 
 
 	render() {
 
-    const { Carts,cartSize } = this.props
+    const { carts,cartSize } = this.props
+
+
+    //console.log('carts',carts)
 
     let cNow = 0;
 
     const size = (cartSize === undefined) ? '25':cartSize
 
     //console.log(Carts.lists);
-    // if(Carts.lists !== undefined && Carts.lists.length > 0){
-    //   cNow = Carts.lists.reduce((acc,c) => acc + c.qty,0)
-    // }
+    if(carts.amtTotal !== undefined ){
+      cNow = carts.amtTotal
+    }
     
 
 		return (
@@ -28,6 +37,10 @@ class Cart extends Component {
           float: left;
           margin-left: 15px;
           top:7px;
+        }
+        .Cart:hover{
+          cursor:pointer !important;
+          top:9px;
         }
         .Badge{
           background: #f36e36;
@@ -44,7 +57,7 @@ class Cart extends Component {
             position: absolute;
         }
         `}</style>
-        <div className="Cart" onClick={()=>{}}>
+        <div className="Cart" onClick={()=>this.goto('/order_lists')}>
           <FaShoppingCart size={size} />
           <div style={{left:'15px'}} className="Badge" >{cNow}</div>
         </div> 
@@ -55,5 +68,10 @@ class Cart extends Component {
 
 }
 
+const mapStateToProps = (state) => {
+  return {
+    carts:state.products.cartOrders
+  }
+}
 
-export default Cart;
+export default connect( mapStateToProps ,{ })(Cart);

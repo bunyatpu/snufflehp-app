@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StickyContainer, Sticky } from 'react-sticky';
 import MainHeader from "../Header";
 import MenuHeader from "../menu";
+import StatusTag from "../StatusTag";
+
 
 class MainLayout extends Component {
 
@@ -46,6 +48,8 @@ class MainLayout extends Component {
 
 				</StickyContainer>
        
+				<StatusTag msg="เพิ่มลงรถเข็นสำเร็จ" style={{right:'43%'}} />
+			  
       </div>
       
 		);

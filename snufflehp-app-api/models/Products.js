@@ -2,6 +2,7 @@
 const db_snufflehp = require('../config/db/db_snufflehp');
 const Sequelize = require('sequelize');
 const ProductDetail = require('./ProductDetail')
+const CartOrders = require('./CartOrders')
 
 
 const Products = db_snufflehp.define('products', {
@@ -30,6 +31,8 @@ const Products = db_snufflehp.define('products', {
 Products.hasOne(ProductDetail)
 ProductDetail.belongsTo(Products)
 
+Products.hasMany(CartOrders)
+CartOrders.belongsTo(Products)
 
 module.exports = Products;
 
