@@ -7,6 +7,7 @@ import {
 import OrderListItem from "./OrderListItem";
 import Shiping from "./Shiping";
 import ConfirmDelete from "../commons/ConfirmDelete";
+import NumberFormat from 'react-number-format';
 
 
 class OrderLists extends Component {
@@ -22,9 +23,14 @@ class OrderLists extends Component {
   
 	render() {
 
-    const { cart:{list},userInfo:{address} } = this.props 
+    const { 
+      cart:{ list },
+      userInfo:{ address },
+      cart:{ summary },
+      cart
+    } = this.props 
 
-
+    //console.log('===>',shipping)
 
     const lists = list.map((i,k)=>{
 
@@ -49,7 +55,8 @@ class OrderLists extends Component {
           }
         `}</style>
 
-      
+
+    
         <Row>
           <Col md={7}>
             <Row>
@@ -91,7 +98,7 @@ class OrderLists extends Component {
                 <Row>
                   <Col style={{fontSize:'15px'}}>
                     <p>
-                      {`${address.addr} ต.${address.sub_district} อ.${address.district} จ.${address.province} ${address.postcode} `}
+                      {`${address.addr && address.addr} ต.${address.sub_district} อ.${address.district} จ.${address.province} ${address.postcode} `}
                     </p>
                   </Col>
                 </Row>
@@ -106,7 +113,7 @@ class OrderLists extends Component {
                 </Row>
                 <Row>
                   <Col>
-                      <Shiping />
+                      <Shiping cart={cart} />
                   </Col>
                 </Row>
                 <Row>
@@ -122,17 +129,38 @@ class OrderLists extends Component {
                   <Col style={{fontSize:'15px'}}>
                      <Row className="ml-2">
                        <Col md="7">ราคาสินค้ารวม</Col>
-                       <Col md="3" className="text-right">54,000</Col>
+                       <Col md="3" className="text-right">
+                        <NumberFormat 
+                          thousandSeparator={true} 
+                          value={parseFloat(summary.productPrice)} 
+                          displayType='text'
+                          decimalScale={2}
+                        />
+                       </Col>
                        <Col md="2">บาท</Col>
                      </Row>
                      <Row className="ml-2 mt-1">
                        <Col md="7">ค่าจัดส่ง</Col>
-                       <Col md="3" className="text-right">120</Col>
+                       <Col md="3" className="text-right">
+                        <NumberFormat 
+                          thousandSeparator={true} 
+                          value={parseFloat(summary.shippingPrice)} 
+                          displayType='text'
+                          decimalScale={2}
+                        />
+                       </Col>
                        <Col md="2">บาท</Col>
                      </Row>
                      <Row className="ml-2 mt-3">
                        <Col md="7"><b>รวม</b></Col>
-                       <Col md="3" style={{fontSize:'20px',color:'orange',fontWeight:'bold'}} className="text-right">54,120</Col>
+                       <Col md="3" style={{fontSize:'20px',color:'orange',fontWeight:'bold'}} className="text-right">
+                        <NumberFormat 
+                          thousandSeparator={true} 
+                          value={parseFloat(summary.total)} 
+                          displayType='text'
+                          decimalScale={2}
+                        />
+                       </Col>
                        <Col md="2">บาท</Col>
                      </Row>
                   </Col>

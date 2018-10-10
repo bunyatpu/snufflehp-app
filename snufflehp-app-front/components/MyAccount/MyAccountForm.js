@@ -139,7 +139,7 @@ class MyAccountForm extends Component {
   
 
 		return (
-      <Container style={{marginTop:'20px'}}>
+      <Container fluid style={{marginTop:'20px'}}>
         <style jsx global>{`
           .alert-success {
             color: #155724 !important;
@@ -150,12 +150,12 @@ class MyAccountForm extends Component {
         `}</style>
 
         <Row>
-          <Col md="3">
+          <Col xs="3" sm="3" lg="3">
  
             <ImageUpload pathImg={imgAvatar} setImg={this.setImg} />
 
           </Col>
-          <Col md="9">
+          <Col xs="9" sm="9" lg="9">
 
             <Row className="">
               <Col md="9">

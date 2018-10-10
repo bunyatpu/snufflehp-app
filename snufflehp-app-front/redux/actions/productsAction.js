@@ -333,6 +333,29 @@ const deleteOrderItem = (item) => {
   }
 }
 
+const selShippingType = (type) =>{
+
+  return (dispatch)=>{
+
+    dispatch({
+      type:actionType.UPDATE_SHIPPING_TYPE,
+      payload:type
+    })
+
+  }
+
+}
+
+const toggleShieldPackage = (type) =>{
+  
+  return (dispatch)=>{
+    dispatch({
+      type:actionType.TOGGLE_SHIELD_PACKAGE,
+      payload:{ type }
+    })
+  }
+}
+
 
 export {
   loadAllProducts,
@@ -341,5 +364,7 @@ export {
   loadProductDetail,
   loadCarts,
   updateCart,
-  deleteOrderItem
+  deleteOrderItem,
+  selShippingType,
+  toggleShieldPackage
 }

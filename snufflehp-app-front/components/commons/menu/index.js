@@ -88,15 +88,15 @@ class MenuHeader extends Component {
         `}</style>
         <Container className="mainMenu">
           <Row>
-            <Col md={(isSticky)?1:3}>
+            <Col md={(isSticky)?1:2}>
               <Fade tag="div"  in={isSticky}  enter={false} exit={false} > 
                 <Logo /> 
               </Fade>
             </Col>
-            <Col  md={(isSticky)?8:6} >
-              <Nav>{lists} </Nav>
+            <Col  md={(isSticky)?8:7} >
+              <Nav className="d-flex justify-content-center">{lists} </Nav>
             </Col>
-            <Col md={3}>
+            <Col md={(isSticky)?3:3} >
               <Fade tag="div" className="d-flex align-items-center justify-content-center"  in={isSticky}  enter={false} exit={false} > 
                 <div style={{width:'90px'}} >
                   <Cart cartSize={25} />

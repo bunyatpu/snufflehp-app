@@ -80,17 +80,18 @@ class CardProduct extends Component {
 	render() {
     //console.log('render Home')
     const { publicRuntimeConfig:{API_URL_HOST} } = getConfig()
-    const { model,width } = this.props
+    const { model,width,responsive } = this.props
     const { hover } = this.state
     //console.log('WritingItem model',model)
 
+    //const fixUrl = 'http://192.168.1.123:3005'
 
     const pathImg = (model.cover_path !== '') ? 
       `${API_URL_HOST}/images/covers/${model.cover_path}`
       :"https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
     
 		return (
-      <Col md={width}>
+      <Col  xs="12" sm="6" lg="3" >
         <Card  
           className="productOnCard"
           onMouseEnter={(e)=>this.handleOver(e,true)}
@@ -98,16 +99,27 @@ class CardProduct extends Component {
           onClick={()=>this.goto(`/product/${model.id}`)}
           
           style={{
-              height:'380px',
+              height:(responsive.mobile)?'650px':'380px',//'380px',
               marginBottom:'20px',
               border:(hover) ? '1px solid rgba(0, 0, 0, 0.27)':'1px solid #fff' ,
-              boxShadow:(hover) ? 'rgba(34, 36, 38, 0.2) 0px 0px 13px 4px':'none'
+              boxShadow:(hover || responsive.mobile) ? 'rgba(34, 36, 38, 0.2) 0px 0px 13px 4px':'none'
             }}>
            
 
             
-            <CardImg top width="100%" height="228" src={pathImg} alt="Card image cap" />
-            <CardBody style={{padding:'20px 5px 0px 5px'}}>
+            <CardImg 
+              top 
+              style={{
+                  width:'100%', 
+                  height:responsive.mobile?'70%':'60%',//'228px'
+                }}  
+              src={pathImg} 
+              alt="Card image cap" />
+
+            <CardBody 
+                style={{
+                  padding:'20px 5px 0px 5px'
+                }} >
               <CardTitle>{model.name}</CardTitle>
               <CardSubtitle>{model.author}</CardSubtitle>
               <div 
@@ -120,7 +132,7 @@ class CardProduct extends Component {
                 ฿ {model.price}
               </div>
               {
-                hover && (
+                (hover || responsive.mobile) && (
                   <div 
 
                     onClick={(e)=>this.handleAddCart(e)}
@@ -130,7 +142,7 @@ class CardProduct extends Component {
                       color: 'rgb(255, 255, 255)',
                       borderRadius: '2px',
                       padding: '8px',
-                      fontSize:'14px'
+                      fontSize: (responsive.mobile) ? '30px':'14px'
                     }}>
                     เพิ่มลงในตะกร้า
                   </div>
@@ -149,7 +161,8 @@ class CardProduct extends Component {
 
 const mapStateToProps = (state) =>{
   return {
-    cart:state.products.cartOrders
+    cart:state.products.cartOrders,
+    responsive:state.responsive
   }
 }
 

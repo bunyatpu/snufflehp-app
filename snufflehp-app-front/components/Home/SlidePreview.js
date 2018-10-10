@@ -56,7 +56,7 @@ class SlidePreview extends Component {
     // };
 
     const settings = {
-      
+      arrows:false,
       dots: true,
       infinite: true,
       lazyLoad: 'ondemand',

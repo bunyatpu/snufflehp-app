@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
+import { reducer as responsiveReducer } from 'react-responsive-redux'
 import AuthReducer from "./AuthReducer";
 import ProductsReducer from "./ProductsReducer"
 import StatusTagReducer from './StatusTagReducer'
@@ -10,7 +11,8 @@ const reducer = combineReducers({
   StatusTagReducer,
   auth:AuthReducer,
   UtilityReducer,
-  form: formReducer
+  form: formReducer,
+  responsive: responsiveReducer
 })
 
 export default reducer

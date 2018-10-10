@@ -4,7 +4,8 @@ import {
   Card, 
   CardBody, 
   Col, Container, Row ,
-  Breadcrumb,BreadcrumbItem
+  Breadcrumb,BreadcrumbItem,
+  Jumbotron
 } from 'reactstrap';
 import Router from "next/router";
 import { connect } from 'react-redux'
@@ -25,10 +26,10 @@ class AllProducts extends Component {
 
   render(){
 
-    const { products } = this.props;
+    const { products,responsive } = this.props;
 
 
-    //console.log('products',products)
+    console.log('responsive',responsive)
 
     const models = products
 
@@ -45,7 +46,9 @@ class AllProducts extends Component {
 
     return (
       <div>
-        <Container>
+       
+
+        <Container fluid={responsive.mobile}>
           <Row>
             <Col>
               <Breadcrumb >
@@ -82,8 +85,10 @@ class AllProducts extends Component {
 
 const mapStateToProps = (state) =>{
   return {
-    products:state.products.productAll
+    products:state.products.productAll,
+    responsive:state.responsive
   }
 }
+
 
 export default connect(mapStateToProps)(AllProducts)

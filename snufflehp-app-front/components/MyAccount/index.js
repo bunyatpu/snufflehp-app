@@ -19,7 +19,7 @@ class MyAccount extends Component {
   
     
 		return (
-      <Container style={{marginTop:'20px'}}>
+      <Container fluid style={{marginTop:'20px'}}>
 
         <style jsx global>{`
           .rwt__tab[aria-selected="true"]{

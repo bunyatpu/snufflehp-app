@@ -13,20 +13,25 @@ class Cart extends Component {
 
 	render() {
 
-    const { carts,cartSize } = this.props
-
+    const { carts,cartSize,responsive } = this.props
+   
 
     //console.log('carts',carts)
+    const phone = (responsive !== undefined && responsive.phone) ? true:false
 
     let cNow = 0;
 
-    const size = (cartSize === undefined) ? '25':cartSize
+    let size = (cartSize === undefined) ? '25':cartSize
+
+    if(phone){
+      size = 60;
+    }
 
     //console.log(Carts.lists);
     if(carts.amtTotal !== undefined ){
       cNow = carts.amtTotal
     }
-    
+    //min-height: 30px;
 
 		return (
       
@@ -36,7 +41,7 @@ class Cart extends Component {
           position: relative;
           float: left;
           margin-left: 15px;
-          top:7px;
+          top:${phone ? '19px':'7px'};
         }
         .Cart:hover{
           cursor:pointer !important;
@@ -44,17 +49,18 @@ class Cart extends Component {
         }
         .Badge{
           background: #f36e36;
-            color: #fff;
-            top: -4px;
-            font-weight: 400;
-            right: -4px;
-            text-align: center;
-            border: 3px solid #f36e36;
-            font-size: 13px;
-            min-width: 20px;
-            line-height: 14px;
-            border-radius: 50%;
-            position: absolute;
+          color: #fff;
+          top: -4px;
+          font-weight: 400;
+          right: -4px;
+          text-align: center;
+          border: 3px solid #f36e36;
+          font-size: 13px;
+          min-width: 20px;
+          
+          line-height: 14px;
+          border-radius: 50%;
+          position: absolute;
         }
         `}</style>
         <div className="Cart" onClick={()=>this.goto('/order_lists')}>

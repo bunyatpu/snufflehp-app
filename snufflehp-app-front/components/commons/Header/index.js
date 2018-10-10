@@ -46,7 +46,9 @@ class MainHeader extends Component {
 
 
 	render() {
-		//console.log('render Home')
+    //console.log('render Home')
+    
+    //console.log('props responsive',this.props.responsive)
 
 		return (
 
@@ -55,17 +57,21 @@ class MainHeader extends Component {
         <GotoLoginPopup />
 				<Row style={{paddingTop:'15px'}}>
           <Col md={2}><Logo /></Col>
-          <Col md={8} >
+          <Col md={7} >
       
             <div className="d-flex flex-row justify-content-center">
-              <div className="text-center"  style={{width:'90%'}}><Search /></div>
-              <div className=""><Cart /></div>
+              <div className="text-center"  style={{width:'85%'}}><Search /></div>
             </div>
             
             
           </Col>
-          <Col md={2} className="d-flex align-items-center justify-content-center">
-            <Account />
+          <Col md={3} >
+
+            <div className="d-flex align-items-center justify-content-end">
+              <div style={{marginRight:'25px'}}><Cart /></div>
+              <Account />
+            </div>
+           
           </Col>
         </Row>
       </Container>
@@ -75,7 +81,15 @@ class MainHeader extends Component {
 
 }
 
-export default connect(null,{ loadCarts })(MainHeader)
+const mapStateToProps = (state) => {
+
+  return  {
+    responsive:state.responsive
+  }
+
+}
+
+export default connect(mapStateToProps,{ loadCarts })(MainHeader)
 
 
 // (

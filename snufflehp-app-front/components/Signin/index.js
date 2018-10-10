@@ -97,11 +97,11 @@ class Signin extends Component {
           }
         `}
         </style>
-        <Container>
+        <Container fluid>
 
           {!showSecc &&
           <Row className="justify-content-center">
-            <Col md="8">
+            <Col xs="12" sm="12" lg="8" >
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>

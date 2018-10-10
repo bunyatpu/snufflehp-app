@@ -46,11 +46,12 @@ class OrderListItem extends Component {
 
     let qtyNow = parseInt(amount,10) - 1
 
-    if(qtyNow < 0){
-      qtyNow = 0
+    if(qtyNow > 0){
+      //qtyNow = 1
+      this.onHandleUpdateCart( qtyNow );
     }
     
-    this.onHandleUpdateCart( qtyNow );
+    
   }
 
   onHandleUpdateCart = async (qty) => {

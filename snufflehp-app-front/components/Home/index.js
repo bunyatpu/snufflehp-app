@@ -16,7 +16,7 @@ class Home extends Component {
 
   render(){
 
-    const { newBook, newOther } = this.props 
+    const { newBook, newOther, responsive } = this.props 
 
     //console.log('newOther',newOther);
 
@@ -42,15 +42,13 @@ class Home extends Component {
 
     return (
       <div>
-        <Row>
-          <Col> 
-            <SlidePreview />
-          </Col>
-        </Row>
-        <Row>
-          
-          <Col>
-            <Container style={{marginTop:'20px'}}>
+     
+        <div style={{padding:'0px'}}>
+          <SlidePreview />
+        </div>
+        <Container fluid={responsive.mobile} style={{marginTop:'20px'}}>
+          <Row>
+            <Col>
               <h5>หนังสือมาใหม่</h5>
               <Card style={{marginBottom:'20px'}}>
                 <CardBody >
@@ -68,10 +66,9 @@ class Home extends Component {
                   </Row>
                 </CardBody>
               </Card>
-            </Container>
-          </Col>
-         
-        </Row>
+            </Col>
+          </Row>
+        </Container>
       </div>
     )
   }
@@ -80,8 +77,19 @@ class Home extends Component {
 const mapStateToProps = (state) =>{
   return {
     newBook:state.products.productNewBook,
-    newOther:state.products.productNewOther
+    newOther:state.products.productNewOther,
+    responsive:state.responsive
   }
 }
+
+// (
+//   <Container fluid style={{marginTop:'20px',padding:'0px'}}>
+//           <Row>
+//             <Col style={{border:'1px solid red'}}> 
+//               <SlidePreview />
+//             </Col>
+//           </Row>
+//         </Container>
+// )
 
 export default connect(mapStateToProps)(Home)

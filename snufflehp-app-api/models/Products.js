@@ -17,6 +17,7 @@ const Products = db_snufflehp.define('products', {
       description : {type: {type:Sequelize.STRING(255)}},
       cover_path : {type: {type:Sequelize.STRING(50)}},
       price : {type:Sequelize.FLOAT(11,4)},
+      weight: {type:Sequelize.INTEGER},
       amount : {type:Sequelize.FLOAT(11,4)},
       status_sale : {type: {type:Sequelize.STRING(50)}},
       status : {type:Sequelize.TINYINT},

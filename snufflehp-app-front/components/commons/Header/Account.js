@@ -79,16 +79,17 @@ class Account extends Component {
 
 	render() {
 
-    const { userInfo,imgHeight } = this.props 
+    const { userInfo,imgHeight, responsive } = this.props 
     const { openAccMenu,modalLogout } = this.state
-
+   
     const { publicRuntimeConfig:{API_URL_HOST} } = getConfig()
 
     //console.log('userInfo',userInfo)
+    const fixStyle = (responsive !== undefined && responsive.mobile) ? { color:'#fff' }:{}
 
     let content = (<div>
-        <a onClick={ () => this.goto('/signup') } style={{marginRight:'5px'}}>สมัครใหม่</a>| 
-        <a onClick={ () => this.goto('/signin') } style={{marginLeft:'5px'}}>เข้าสู่ระบบ</a>
+        <a onClick={ () => this.goto('/signup') } style={{marginRight:'5px',color:'#fff'}}>สมัครใหม่</a>| 
+        <a onClick={ () => this.goto('/signin') } style={{marginLeft:'5px',color:'#fff'}}>เข้าสู่ระบบ</a>
       </div>
     )
 
@@ -101,7 +102,7 @@ class Account extends Component {
             onClick={() => this.toggleAccMenu()}
             className="d-flex align-items-center justify-content-end myacount"
           >
-          <div>{userInfo.username}</div>
+          <div style={{color:'#fff'}}>{userInfo.username}</div>
           <div>
             <img 
               style={{
@@ -118,7 +119,7 @@ class Account extends Component {
 
 		return (
 
-      <div className="Account" style={{fontSize:'14px',width:'100%'}}  >
+      <div className="Account" style={{fontSize:'14px'}}  >
         <style jsx global>{`
           
           .img-avatar{
