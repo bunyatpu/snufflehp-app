@@ -2728,9 +2728,7 @@ function (_Component) {
         styleId: "2006523510",
         css: [".bgHeader{color:rgba(255,255,255,0.75);background-color:#313340;}", ".mainFooter{border-top:1px solid #c6c8ca;background:#525d69;height:200px;}", ".bm-burger-button{width:".concat(responsive.phone ? '76px' : '36px', " !important;height:").concat(responsive.phone ? '75px' : '30px', " !important;}")],
         dynamic: [responsive.phone ? '76px' : '36px', responsive.phone ? '75px' : '30px']
-      }), external__react__default.a.createElement(external__react_responsive_redux_["DesktopScreen"], null, external__react__default.a.createElement("h3", {
-        className: style__default.a.dynamic([["2006523510", [responsive.phone ? '76px' : '36px', responsive.phone ? '75px' : '30px']]])
-      }, "Desktop"), external__react__default.a.createElement("div", {
+      }), external__react__default.a.createElement(external__react_responsive_redux_["DesktopScreen"], null, external__react__default.a.createElement("div", {
         className: style__default.a.dynamic([["2006523510", [responsive.phone ? '76px' : '36px', responsive.phone ? '75px' : '30px']]]) + " " + "mainHeader bgHeader"
       }, external__react__default.a.createElement(Header, null)), external__react__default.a.createElement(external__react_sticky_["StickyContainer"], null, external__react__default.a.createElement(external__react_sticky_["Sticky"], null, function (_ref) {
         var style = _ref.style,
@@ -3568,20 +3566,31 @@ function (_Component) {
           summary = _props.cart.summary,
           cart = _props.cart; //console.log('===>',shipping)
 
-      var lists = list.map(function (i, k) {
-        return external__react__default.a.createElement(OrderLists_OrderListItem, {
-          key: k,
-          item: i
+      var lists = '';
+      console.log('list.lenght', list.length);
+      var haveLists = list.length > 0 ? true : false;
+
+      if (haveLists) {
+        lists = list.map(function (i, k) {
+          return external__react__default.a.createElement(OrderLists_OrderListItem, {
+            key: k,
+            item: i
+          });
         });
-      });
+      } else {
+        lists = external__react__default.a.createElement("div", {
+          className: "txt_emty"
+        }, "\u0E22\u0E31\u0E07\u0E44\u0E21\u0E48\u0E21\u0E35\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E17\u0E35\u0E48\u0E40\u0E25\u0E37\u0E2D\u0E01");
+      }
+
       return external__react__default.a.createElement(external__reactstrap_["Container"], {
         style: {
           marginTop: '20px'
         }
       }, external__react__default.a.createElement(style__default.a, {
-        styleId: "4016786860",
-        css: [".rightOrder .badge-warning{color:#686969;background-color:#ffc107;}", ".rightOrder .badge-warning:hover{cursor:pointer;background-color:#e6b10f;}", ".rightOrder .alert{color:#676869;}"]
-      }), external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], {
+        styleId: "3967591125",
+        css: [".rightOrder .badge-warning{color:#686969;background-color:#ffc107;}", ".rightOrder .badge-warning:hover{cursor:pointer;background-color:#e6b10f;}", ".rightOrder .alert{color:#676869;}", ".emtyList .txt_emty{text-align:center;font-size:30px;font-weight:bold;color:#a7a5a5;padding:20px;}"]
+      }), haveLists && external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], {
         md: 7
       }, external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], {
         className: "mt-2",
@@ -3609,29 +3618,29 @@ function (_Component) {
       }, external__react__default.a.createElement(external__reactstrap_["Card"], {
         className: "mt-2"
       }, external__react__default.a.createElement(external__reactstrap_["CardBody"], null, external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], null, external__react__default.a.createElement("div", {
-        className: "jsx-4016786860" + " " + "alert alert-secondary d-flex justify-content-between p-2"
+        className: "jsx-3967591125" + " " + "alert alert-secondary d-flex justify-content-between p-2"
       }, external__react__default.a.createElement("div", {
-        className: "jsx-4016786860"
+        className: "jsx-3967591125"
       }, "\u0E17\u0E35\u0E48\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E01\u0E32\u0E23\u0E08\u0E31\u0E14\u0E2A\u0E48\u0E07"), external__react__default.a.createElement("div", {
-        className: "jsx-4016786860"
+        className: "jsx-3967591125"
       }, external__react__default.a.createElement("span", {
-        className: "jsx-4016786860" + " " + "badge badge-warning p-2"
+        className: "jsx-3967591125" + " " + "badge badge-warning p-2"
       }, "\u0E40\u0E1B\u0E25\u0E35\u0E48\u0E22\u0E19\u0E17\u0E35\u0E48\u0E2D\u0E22\u0E39\u0E48"))))), external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], {
         style: {
           fontSize: '15px'
         }
       }, external__react__default.a.createElement("p", {
-        className: "jsx-4016786860"
-      }, "".concat(address.addr && address.addr, " \u0E15.").concat(address.sub_district, " \u0E2D.").concat(address.district, " \u0E08.").concat(address.province, " ").concat(address.postcode, " ")))), external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], null, external__react__default.a.createElement("div", {
-        className: "jsx-4016786860" + " " + "alert alert-secondary d-flex justify-content-between p-2 mt-3"
+        className: "jsx-3967591125"
+      }, haveLists && "".concat(address.addr && address.addr, " \u0E15.").concat(address.sub_district, " \u0E2D.").concat(address.district, " \u0E08.").concat(address.province, " ").concat(address.postcode, " ")))), external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], null, external__react__default.a.createElement("div", {
+        className: "jsx-3967591125" + " " + "alert alert-secondary d-flex justify-content-between p-2 mt-3"
       }, external__react__default.a.createElement("div", {
-        className: "jsx-4016786860"
+        className: "jsx-3967591125"
       }, "\u0E15\u0E31\u0E27\u0E40\u0E25\u0E37\u0E2D\u0E01\u0E43\u0E19\u0E01\u0E32\u0E23\u0E08\u0E31\u0E14\u0E2A\u0E48\u0E07")))), external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], null, external__react__default.a.createElement(OrderLists_Shiping, {
         cart: cart
       }))), external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], null, external__react__default.a.createElement("div", {
-        className: "jsx-4016786860" + " " + "alert alert-secondary d-flex justify-content-between p-2 mt-3"
+        className: "jsx-3967591125" + " " + "alert alert-secondary d-flex justify-content-between p-2 mt-3"
       }, external__react__default.a.createElement("div", {
-        className: "jsx-4016786860"
+        className: "jsx-3967591125"
       }, "\u0E2A\u0E23\u0E38\u0E1B\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E2A\u0E31\u0E48\u0E07\u0E0B\u0E37\u0E49\u0E2D")))), external__react__default.a.createElement(external__reactstrap_["Row"], null, external__react__default.a.createElement(external__reactstrap_["Col"], {
         style: {
           fontSize: '15px'
@@ -3669,7 +3678,7 @@ function (_Component) {
       }, external__react__default.a.createElement(external__reactstrap_["Col"], {
         md: "7"
       }, external__react__default.a.createElement("b", {
-        className: "jsx-4016786860"
+        className: "jsx-3967591125"
       }, "\u0E23\u0E27\u0E21")), external__react__default.a.createElement(external__reactstrap_["Col"], {
         md: "3",
         style: {
@@ -3690,7 +3699,20 @@ function (_Component) {
       }, external__react__default.a.createElement(external__reactstrap_["Col"], null, external__react__default.a.createElement(external__reactstrap_["Button"], {
         color: "info",
         className: "w-100"
-      }, "\u0E0A\u0E33\u0E23\u0E30\u0E40\u0E07\u0E34\u0E19"))))))), external__react__default.a.createElement(commons_ConfirmDelete, null));
+      }, "\u0E0A\u0E33\u0E23\u0E30\u0E40\u0E07\u0E34\u0E19"))))))), !haveLists && external__react__default.a.createElement(external__reactstrap_["Row"], {
+        className: "emtyList"
+      }, external__react__default.a.createElement(external__reactstrap_["Col"], {
+        className: "mt-2",
+        md: "12"
+      }, external__react__default.a.createElement(external__reactstrap_["Card"], {
+        style: {
+          background: '#ececec',
+          border: '1px solid #d0d0d0',
+          marginBottom: '200px'
+        }
+      }, external__react__default.a.createElement(external__reactstrap_["CardBody"], {
+        className: "p-2"
+      }, lists)))), external__react__default.a.createElement(commons_ConfirmDelete, null));
     }
   }]);
 

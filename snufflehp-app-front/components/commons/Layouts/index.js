@@ -54,8 +54,7 @@ class MainLayout extends Component {
 
 				
 				<DesktopScreen >
-					
-					<h3>Desktop</h3>
+		
 					<div className="mainHeader bgHeader">
 						<MainHeader />
 					</div>

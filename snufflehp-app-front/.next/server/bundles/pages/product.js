@@ -2728,9 +2728,7 @@ function (_Component) {
         styleId: "2006523510",
         css: [".bgHeader{color:rgba(255,255,255,0.75);background-color:#313340;}", ".mainFooter{border-top:1px solid #c6c8ca;background:#525d69;height:200px;}", ".bm-burger-button{width:".concat(responsive.phone ? '76px' : '36px', " !important;height:").concat(responsive.phone ? '75px' : '30px', " !important;}")],
         dynamic: [responsive.phone ? '76px' : '36px', responsive.phone ? '75px' : '30px']
-      }), external__react__default.a.createElement(external__react_responsive_redux_["DesktopScreen"], null, external__react__default.a.createElement("h3", {
-        className: style__default.a.dynamic([["2006523510", [responsive.phone ? '76px' : '36px', responsive.phone ? '75px' : '30px']]])
-      }, "Desktop"), external__react__default.a.createElement("div", {
+      }), external__react__default.a.createElement(external__react_responsive_redux_["DesktopScreen"], null, external__react__default.a.createElement("div", {
         className: style__default.a.dynamic([["2006523510", [responsive.phone ? '76px' : '36px', responsive.phone ? '75px' : '30px']]]) + " " + "mainHeader bgHeader"
       }, external__react__default.a.createElement(Header, null)), external__react__default.a.createElement(external__react_sticky_["StickyContainer"], null, external__react__default.a.createElement(external__react_sticky_["Sticky"], null, function (_ref) {
         var style = _ref.style,
